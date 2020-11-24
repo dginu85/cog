@@ -349,6 +349,23 @@ if (COG_PLATFORM_DRM AND NOT COG_USE_WEBKITGTK)
         DESTINATION ${CMAKE_INSTALL_LIBDIR}
         COMPONENT "runtime"
     )
+
+    add_library(cogplatform-drm-dmabuf MODULE platform/cog-platform-drm-dmabuf.c)
+    set_property(TARGET cogplatform-drm-dmabuf PROPERTY C_STANDARD 99)
+    target_compile_definitions(cogplatform-drm-dmabuf PRIVATE G_LOG_DOMAIN=\"Cog-DRM\")
+    target_link_libraries(cogplatform-drm-dmabuf PRIVATE
+        cogcore
+        PkgConfig::LibGBM
+        PkgConfig::LibDRM
+        PkgConfig::WEB_ENGINE
+        PkgConfig::WaylandServer
+        PkgConfig::WpeFDO
+    )
+
+    install(TARGETS cogplatform-drm-dmabuf
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        COMPONENT "runtime"
+    )
 endif () # COG_PLATFORM_DRM AND NOT COG_USE_WEBKITGTK
 
 if (COG_PLATFORM_X11 AND NOT COG_USE_WEBKITGTK)
