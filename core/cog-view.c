@@ -103,10 +103,6 @@ static void
 cog_view_constructed (GObject *object)
 {
     G_OBJECT_CLASS (cog_view_parent_class)->constructed (object);
-
-    webkit_web_view_load_html (WEBKIT_WEB_VIEW (object),
-                               "<!DOCTYPE html><html><body></body></html>",
-                               "about:blank");
 }
 
 static void
